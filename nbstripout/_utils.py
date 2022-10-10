@@ -94,7 +94,7 @@ def strip_zeppelin_output(nb):
     return nb
 
 
-def strip_output(nb, keep_output, keep_count, extra_keys=[], drop_empty_cells=False, drop_tagged_cells=[],
+def strip_output(nb, keep_output, keep_count, extra_keys=[], dry_run=False, drop_empty_cells=False, drop_tagged_cells=[],
                  strip_init_cells=False, max_size=0):
     """
     Strip the outputs, execution count/prompt number and miscellaneous
@@ -129,6 +129,9 @@ def strip_output(nb, keep_output, keep_count, extra_keys=[], drop_empty_cells=Fa
 
         # Remove the outputs, unless directed otherwise
         if 'outputs' in cell:
+            
+            if dry_run:
+                print("Dry Run!")
 
             # Default behavior (max_size == 0) strips all outputs.
             if not keep_output_this_cell:
